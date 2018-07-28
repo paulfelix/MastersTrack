@@ -1,0 +1,5 @@
+name: stats
+version: latest
+runtime: docker
+path: /stats
+format: json
