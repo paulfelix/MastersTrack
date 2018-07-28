@@ -67,6 +67,8 @@ def iter_querys(args):
 
 
 def read_rankings_data(query):
+    with open('creds.txt') as f:
+        cookie = f.read().strip()
     params = {param_name_map[k]: v for k, v in query.items()}
     params[param_name_map['gender']] = 'Men' if query['gender'] == 'M' else 'Women'
     r = requests.get(mastersrankings_url, params=params, headers={'Cookie': cookie})
@@ -233,7 +235,7 @@ if __name__ == "__main__":
     parser.add_argument('-d', '--debug', action='store_true')
     parser.add_argument('-s', '--season', default='Indoor', choices=['Indoor', 'Outdoor'])
     parser.add_argument('-g', '--gender', default='M', choices=['M', 'W'])
-    parser.add_argument('-y', '--years', default='2014')
+    parser.add_argument('-y', '--years', default='2007-2018')
     parser.add_argument('-a', '--agegroups', default='50', help='(eg., 50-100)')
     parser.add_argument('-e', '--events', default='60', help='(eg., 60,200)')
     args = parser.parse_args()
